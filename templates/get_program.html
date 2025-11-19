@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <h2>{{ program.capitalize() }} Program</h2>
+    <p>Enter your email below to receive the full {{ program }} program directly to your inbox.</p>
+</section>
+
+<div class="form-container">
+    <form action="" method="POST" class="form-box">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        <button type="submit" class="btn">Send Program</button>
+    </form>
+</div>
+{% endblock %}

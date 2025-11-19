@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <h2>Optimal Fitness & Performance</h2>
+    <p>Welcome to the Optimal section of the website, designed for advanced members seeking science-based strategies to train smarter, recover better, and achieve peak performance.</p>
+</section>
+
+<!-- Optimal Sections -->
+<section class="features">
+    <div class="card">
+        <h4>Optimal Training</h4>
+        <p>Evidence-based methods to maximize strength, endurance, and athletic performance.</p>
+        <a href="{{ url_for('optimal_training') }}" class="btn">Learn More</a>
+    </div>
+    <div class="card">
+        <h4>Optimal Nutrition</h4>
+        <p>Science-backed nutrition strategies to fuel growth, recovery, and energy.</p>
+        <a href="{{ url_for('optimal_nutrition') }}" class="btn">Learn More</a>
+    </div>
+    <div class="card">
+        <h4>Optimal Recovery</h4>
+        <p>Recovery protocols, mobility, and rest strategies to optimize gains and prevent injuries.</p>
+        <a href="{{ url_for('optimal_recovery') }}" class="btn">Learn More</a>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <h2>{{ title }}</h2>
+</section>
+
+<div class="form-container">
+    <p>{{ message }}</p>
+    <a href="{{ url_for('home') }}" class="btn">Return Home</a>
+</div>
+{% endblock %}

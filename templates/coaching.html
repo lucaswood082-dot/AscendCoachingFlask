@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <h2>1:1 Coaching with Ascend Coaching</h2>
+    <p>Personalized coaching to help you achieve your fitness goals faster and smarter.</p>
+</section>
+
+<!-- Coaching Styles Section -->
+<section class="intro">
+    <h3>Coaching Styles We Offer</h3>
+    <div class="features">
+        <div class="card">
+            <h4>Bodybuilding</h4>
+            <p>Structured hypertrophy programs with nutrition guidance for maximum muscle growth.</p>
+        </div>
+        <div class="card">
+            <h4>Powerlifting</h4>
+            <p>Strength-focused coaching with technique optimization and progressive overload strategies.</p>
+        </div>
+        <div class="card">
+            <h4>Functional Training</h4>
+            <p>Improve mobility, endurance, and overall functional strength for everyday performance.</p>
+        </div>
+        <div class="card">
+            <h4>Fat Loss & Conditioning</h4>
+            <p>Targeted programs to burn fat while maintaining muscle and improving athletic performance.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Why 1:1 Coaching Section -->
+<section class="intro">
+    <h3>Why 1:1 Coaching is Better than Just a Program</h3>
+    <p>With 1:1 coaching, you get a program tailored specifically to your body, goals, and lifestyle. Unlike generic programs, our coaches track your progress, adjust routines as needed, provide accountability, and give expert feedback — helping you achieve results faster and safely.</p>
+    <p>Personalized guidance ensures that your technique is correct, your nutrition is optimized, and your training is progressive — minimizing plateaus and maximizing gains.</p>
+</section>
+
+<!-- Coaching Signup Form -->
+<section class="form-container">
+    <form action="/submit_contact" method="POST" class="form-box">
+        <h3>Sign Up for Coaching</h3>
+        <label>Name</label>
+        <input type="text" name="name" required>
+
+        <label>Email or Phone</label>
+        <input type="text" name="contact" required>
+
+        <label>Goals (brief)</label>
+        <textarea name="goals" rows="4" required></textarea>
+
+        <button type="submit" class="btn">Submit Signup</button>
+    </form>
+</section>
+
+{% endblock %}

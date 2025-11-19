@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <h2 class="hero-title">Ascend Coaching — Dreams without Destinations</h2>
+    <p class="hero-sub">Reach. Rise. Ascend.</p>
+    <a class="btn" href="/programs">View Programs</a>
+    <a class="btn secondary" href="/coaching">Sign Up</a>
+</section>
+
+<!-- Intro Section -->
+<section class="intro">
+    <h3>Our Philosophy</h3>
+    <p>We believe progress is the path — not the destination. Training + nutrition tuned to your goals with simple, consistent plans.</p>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="card">
+        <h4>Programs</h4>
+        <p>Guides for beginner → advanced, tailored to strength, hypertrophy, or fat loss.</p>
+    </div>
+    <div class="card">
+        <h4>Nutrition</h4>
+        <p>Macro-focused plans, meal ideas, and recovery guidance that actually works with your life.</p>
+    </div>
+    <div class="card">
+        <h4>Coaching</h4>
+        <p>1-on-1 coaching options and online programs with check-ins and progress tracking.</p>
+    </div>
+</section>
+
+<!-- Programs Section -->
+<section class="programs">
+    <h2>Training Programs</h2>
+    <div class="program-cards">
+        <div class="program-card">
+            <img src="{{ url_for('static', filename='beginner.jpg') }}" alt="Beginner PPL">
+            <h3>Beginner PPL</h3>
+            <p>Perfect for those just starting out. 12-week program, form guidance, progressive overload.</p>
+        </div>
+        <div class="program-card">
+            <img src="{{ url_for('static', filename='intermediate.jpg') }}" alt="Intermediate Upper Lower">
+            <h3>Intermediate Upper Lower</h3>
+            <p>Take your training to the next level. 16-week program, advanced splits, periodization.</p>
+        </div>
+        <div class="program-card">
+            <img src="{{ url_for('static', filename='advanced.jpg') }}" alt="Advanced Upper Lower">
+            <h3>Advanced Upper Lower</h3>
+            <p>Serious athletes only. 20-week elite program, competition prep, advanced techniques.</p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ascend Coaching — Dreams without Destinations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Ascend Coaching</h1>
+            <p>Dreams without Destinations</p>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/programs">Programs</a>
+                <a href="/nutrition">Nutrition Guide</a>
+                <a href="/coaching">Coaching Signup</a>
+                <a href="/faq">FAQ</a>
+                <a href="/contact">Contact</a>
+                <a href="/optimal">Optimal</a>
+            </nav>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Ascend Coaching. Built with Discipline.</p>
+        </div>
+    </footer>
+</body>
+</html>

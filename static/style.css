@@ -1,0 +1,873 @@
+:root {
+    --accent: #111;
+    --muted: #ccc;
+    --bg: #2f2c91;
+    --card: rgb(25, 80, 157);
+}
+
+/* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body + Background */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    text-align: center;
+    background-image: url("{{ url_for('static', filename='background.jpg') }}");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    line-height: 1.6;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Header / Nav */
+header {
+    padding: 50px 20px;
+    background-color: rgba(0,0,0,0.5);
+}
+
+header h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+    padding: 150px 20px 100px;
+}
+
+.hero h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+.btn {
+    background-color: #ff7f50;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.btn.secondary {
+    background-color: #555;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Intro Section */
+.intro {
+    padding: 80px 20px;
+    background-color: rgba(0,0,0,0.5);
+    margin-bottom: 40px;
+}
+
+.intro h3 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.intro p {
+    font-size: 18px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Features Section */
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 80px 20px;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.features .card {
+    background-color: var(--card);
+    padding: 30px;
+    border-radius: 12px;
+    flex: 1 1 250px;
+    max-width: 300px;
+    text-align: center;
+}
+
+.features .card h4 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.features .card p {
+    font-size: 16px;
+}
+
+/* Programs Section */
+.programs {
+    padding: 80px 20px;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.programs h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+/* Horizontal Cards */
+.program-cards {
+    display: flex;
+    flex-wrap: wrap;          /* Wrap on smaller screens */
+    justify-content: center;  /* Center horizontally */
+    gap: 30px;                /* Space between cards */
+}
+
+.program-card {
+    background-color: var(--card);
+    padding: 20px;
+    border-radius: 12px;
+    flex: 1 1 250px;          /* Flexible width, minimum 250px */
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.program-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.program-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.program-card p {
+    font-size: 16px;
+}
+
+.program-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+    padding: 40px 20px;
+    background-color: rgba(0,0,0,0.7);
+}
+
+footer p {
+    font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .features, .program-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    text-align: center;
+    background-color: rgb(35, 58, 135); /* black background */
+    /* Remove background-image if you don't want any image */
+}
+/* Contact Page */
+.contact {
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.contact-card {
+    background-color: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+.contact-card h3 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.contact-card input,
+.contact-card textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+}
+
+.contact-card input::placeholder,
+.contact-card textarea::placeholder {
+    color: #ddd;
+}
+
+.contact-card button {
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff7f50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-card button:hover {
+    background-color: #ff4f20;
+}
+
+/* Responsive */
+@media(max-width: 900px){
+    .contact-card {
+        max-width: 90%;
+    }
+}
+/* About Page */
+.about {
+    padding: 80px 20px;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.about-card {
+    background-color: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 350px;
+    flex: 1 1 300px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+.about-card h3 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.about-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fff;
+}
+
+/* Responsive */
+@media(max-width: 900px){
+    .about-card {
+        max-width: 90%;
+    }
+}
+.services {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 60px 20px;
+    flex-wrap: wrap;
+}
+
+.service-card {
+    background-color: rgba(255,255,255,0.1);
+    backdrop-filter: blur(6px);
+    border-radius: 16px;
+    padding: 40px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.35);
+}
+
+.service-card h3 {
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.service-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 26px;
+    border-radius: 10px;
+    background-color: #1a73e8;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.25s ease;
+}
+
+.service-btn:hover {
+    background-color: #145bb3;
+}
+.info-section {
+    padding: 60px 20px;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.info-box {
+    background-color: rgba(255,255,255,0.08);
+    padding: 30px;
+    border-radius: 14px;
+    width: 350px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    line-height: 1.6;
+}
+/* Nutrition Page Styling */
+.nutrition-hero {
+    padding: 80px 20px;
+    background-color: rgba(0,0,0,0.55);
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.nutrition-hero h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.nutrition-hero p {
+    font-size: 20px;
+    max-width: 700px;
+    margin: auto;
+}
+
+.nutrition-section {
+    background-color: rgba(255,255,255,0.08);
+    padding: 30px;
+    border-radius: 12px;
+    margin: 30px auto;
+    max-width: 850px;
+    text-align: left;
+}
+
+.nutrition-section h3 {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.nutrition-section p,
+.nutrition-section ul {
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.nutrition-section ul {
+    margin-left: 20px;
+}
+
+.nutrition-section.last {
+    margin-bottom: 80px;
+}
+/* Program Cards Container */
+.program-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Individual Program Card */
+.program-card {
+    background-color: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 12px;
+    flex: 1 1 250px;
+    max-width: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;   /* Makes button align at bottom */
+    justify-content: space-between;
+    transition: transform 0.3s;
+}
+
+/* Program image */
+.program-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Program title */
+.program-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Program description */
+.program-card p {
+    font-size: 16px;
+    margin-bottom: 20px;  /* Space before button */
+}
+
+/* Learn More button */
+.program-card .btn {
+    margin-top: auto;        /* Push button to bottom */
+    padding: 12px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #ff7f50;
+    color: white;
+    transition: all 0.3s;
+}
+
+.program-card .btn:hover {
+    background-color: #ff4f20;
+    transform: translateY(-3px);
+}
+/* Program email signup page styling */
+.form-container {
+    max-width: 500px;
+    margin: 50px auto 100px;
+    background-color: rgba(0,0,0,0.6);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+.form-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+}
+
+.form-container input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.form-container button {
+    padding: 14px 30px;
+    border-radius: 8px;
+    background-color: #ff7f50;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #ff4f20;
+}
+
+/* Adjust hero for this page */
+.hero {
+    padding: 100px 20px 40px;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Submit success page styling */
+.form-container {
+    max-width: 600px;
+    margin: 50px auto 100px;
+    background-color: rgba(0,0,0,0.6);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    text-align: center;
+    color: white;
+    line-height: 1.6;
+}
+
+.form-container p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.form-container .btn {
+    padding: 14px 30px;
+    border-radius: 8px;
+    background-color: #ff7f50;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.form-container .btn:hover {
+    background-color: #ff4f20;
+}
+
+/* Hero adjustment for success page */
+.hero {
+    padding: 100px 20px 40px;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+/* Coaching page specific */
+.form-container {
+    max-width: 600px;
+    margin: 50px auto 100px;
+    background-color: rgba(0,0,0,0.6);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+.form-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+}
+
+.form-container input[type="text"], 
+.form-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.form-container button {
+    padding: 14px 30px;
+    border-radius: 8px;
+    background-color: #ff7f50;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #ff4f20;
+}
+
+/* Features cards on coaching styles section */
+.features .card {
+    background-color: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 12px;
+    flex: 1 1 250px;
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.features .card:hover {
+    transform: translateY(-5px);
+}
+
+.features .card h4 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.features .card p {
+    font-size: 16px;
+}
+.features .card .btn {
+    margin-top: 15px; /* space above button */
+}
+.features .card .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-3px);
+    transition: all 0.3s;
+}
+.features .card {
+    background-color: rgba(255,255,255,0.05); /* subtle variation */
+    padding: 25px;
+    border-radius: 12px;
+}
+.features .card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s;
+}
+.optimal-techniques {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px 20px;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.technique-card {
+    background-color: rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 12px;
+    flex: 1 1 300px;
+    max-width: 350px;
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.technique-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: #ffcc00;
+}
+
+.technique-card p {
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.5;
+}
+
+.technique-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+.optimal-training {
+    padding: 80px 20px;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.optimal-training h2 {
+    font-size: 42px;
+    margin-bottom: 30px;
+}
+
+.optimal-training .intro {
+    font-size: 20px;
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+}
+
+.training-topic {
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+    text-align: left;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.training-topic h3 {
+    font-size: 28px;
+    margin-bottom: 12px;
+    color: #ff7f50;
+}
+
+.training-topic p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.training-topic:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255,255,255,0.15);
+}
+/* Nutrition cards */
+.nutrition-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.nutrition-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    flex: 1 1 280px;
+    max-width: 300px;
+    text-align: left;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.nutrition-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.nutrition-card p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.nutrition-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+/* Supplements / Nutrition cards reuse same style */
+.supplement-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+.supplement-cards .nutrition-card {
+    flex: 1 1 280px;
+    max-width: 300px;
+    background-color: rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: left;
+    transition: transform 0.3s, background 0.3s;
+}
+.supplement-cards .nutrition-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255,255,255,0.15);
+}
+.supplement-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.supplement-card {
+    background-color: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 12px;
+    flex: 1 1 250px;
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.supplement-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.supplement-card p {
+    font-size: 16px;
+}
+
+.supplement-card:hover {
+    transform: translateY(-5px);
+}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="optimal-nutrition">
+    <div class="container">
+        <h2>Optimal Nutrition</h2>
+        <p class="intro">
+            Welcome to the Optimal Nutrition section — here we cover advanced, science-backed nutritional strategies to maximize muscle growth, recovery, and overall performance.
+        </p>
+
+        <!-- Supplements Button -->
+        <div style="margin: 30px 0; text-align:center;">
+            <a href="{{ url_for('supplements') }}" class="btn">Learn About Supplements</a>
+        </div>
+
+        <!-- Nutrition Topic Cards -->
+        <div class="nutrition-cards">
+            <div class="nutrition-card">
+                <h3>Protein Intake & Distribution</h3>
+                <p>Ensuring sufficient protein throughout the day is essential for muscle repair and growth. Why it matters: Protein stimulates muscle protein synthesis and prevents muscle breakdown. Integration: Consume 20–40g protein every 3–4 hours.</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>Leucine Threshold Targeting</h3>
+                <p>Leucine is a key amino acid that triggers muscle protein synthesis. Why it matters: Hitting the leucine threshold ensures maximal anabolic response. Integration: Include 2–3g leucine per meal.</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>Carb Timing for Muscle Growth</h3>
+                <p>Timing carbohydrates around workouts improves energy availability and glycogen replenishment. Integration: Prioritize carbs pre- and post-workout for recovery and growth.</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>Creatine Supplementation</h3>
+                <p>Supports ATP production, improves strength and power. Integration: 3–5g daily, preferably post-workout.</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>Omega-3 Fatty Acids</h3>
+                <p>Supports joint health, reduces inflammation, and improves recovery. Integration: 1–3g daily via fish oil or diet.</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>Beta-Alanine</h3>
+                <p>Delays fatigue during high-intensity training by buffering lactic acid. Integration: 3–6g daily, split into doses.</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>HMB (β-Hydroxy β-Methylbutyrate)</h3>
+                <p>Reduces muscle protein breakdown and aids recovery. Integration: 3g daily, split throughout the day.</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>Hydration & Electrolytes</h3>
+                <p>Maintaining fluid and electrolyte balance is crucial for performance and recovery. Integration: Drink water consistently and replace electrolytes if sweating heavily.</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>Antioxidants & Polyphenols</h3>
+                <p>Help reduce oxidative stress and support recovery. Integration: Include colorful fruits, vegetables, and green tea.</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>Meal Frequency vs. Protein Pacing</h3>
+                <p>Distributing protein evenly promotes muscle protein synthesis. Integration: 3–5 meals daily with protein at each meal.</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>Post-Activation / Nutrient Synergy</h3>
+                <p>Pairing nutrients and timing intake with training enhances adaptation. Integration: Combine protein + carbs post-workout for optimal recovery.</p>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>Fiber-Specific Nutrition</h3>
+                <p>Targeting macronutrients to specific muscle fibers can improve growth. Integration: Adjust protein and carb timing to prioritize fast-twitch fiber stimulation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

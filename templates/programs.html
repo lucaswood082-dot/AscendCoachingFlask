@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <h2>Our Programs</h2>
+    <p>Choose from structured programs designed for all experience levels.</p>
+</section>
+
+<!-- Main Program Cards -->
+<section class="programs">
+    <div class="program-cards">
+
+        <div class="program-card">
+            <img src="{{ url_for('static', filename='beginner.jpg') }}" alt="Beginner Program">
+            <h3>Beginner PPL</h3>
+            <p>12-week progressive plan designed for new lifters to build a strong foundation.</p>
+            <a href="/get_program/beginner" class="btn">Learn More</a>
+        </div>
+
+        <div class="program-card">
+            <img src="{{ url_for('static', filename='intermediate.jpg') }}" alt="Intermediate Program">
+            <h3>Intermediate Upper Lower</h3>
+            <p>16-week program with increased intensity, volume control, and structured progression.</p>
+            <a href="/get_program/intermediate" class="btn">Learn More</a>
+        </div>
+
+        <div class="program-card">
+            <img src="{{ url_for('static', filename='advanced.jpg') }}" alt="Advanced Program">
+            <h3>Advanced Upper Lower</h3>
+            <p>20-week advanced training block for serious lifters seeking elite performance.</p>
+            <a href="/get_program/advanced" class="btn">Learn More</a>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
+<a href="{{ url_for('get_program', program='beginner') }}" class="btn">Learn More</a>
+<a href="{{ url_for('get_program', program='intermediate') }}" class="btn">Learn More</a>
+<a href="{{ url_for('get_program', program='advanced') }}" class="btn">Learn More</a>
