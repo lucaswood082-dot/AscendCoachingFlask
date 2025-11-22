@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="calc-page">
 
-<!-- Page Intro -->
-<section class="intro">
-    <h2>Calorie & Macro Calculator</h2>
-    <p>Calculate your daily calories and macro breakdown based on your stats.</p>
-</section>
+    <!-- Title -->
+    <h2 class="calc-title">Calorie & Macro Calculator</h2>
+    <p class="calc-subtitle">
+        Enter your details below to estimate daily calories and macros.
+    </p>
 
-<!-- Calculator Form -->
-<section class="form-container">
-    <form id="calcForm" class="form-box">
+    <!-- Calculator Form -->
+    <form id="calcForm" class="calc-form">
 
         <label>Age</label>
         <input type="number" id="age" required>
@@ -22,7 +22,7 @@
         <input type="number" id="weight" required>
 
         <label>Activity Level</label>
-        <select id="activity" class="styled-select">
+        <select id="activity" class="styled-select" required>
             <option value="1.2">Sedentary (little exercise)</option>
             <option value="1.375">Lightly Active (1–3 days/week)</option>
             <option value="1.55">Moderately Active (3–5 days/week)</option>
@@ -30,46 +30,46 @@
             <option value="1.9">Super Active (athlete)</option>
         </select>
 
-        <button type="button" class="btn" style="margin-top: 15px;" onclick="calculate()">Calculate</button>
+        <button type="button" class="btn calc-btn" onclick="calculate()">
+            Calculate
+        </button>
     </form>
-</section>
 
-<!-- Result Section -->
-<section id="results" class="form-container" style="display:none;">
-    <div class="form-box">
-        <h3>Your Results</h3>
-        <p><strong>Maintenance Calories:</strong> <span id="calories"></span> kcal/day</p>
-        <p><strong>Protein:</strong> <span id="protein"></span> g/day</p>
-        <p><strong>Fats:</strong> <span id="fats"></span> g/day</p>
-        <p><strong>Carbs:</strong> <span id="carbs"></span> g/day</p>
+    <!-- Results Box -->
+    <div id="results" class="results-box" style="display: none;">
+        <h3>Your Daily Targets</h3>
+        <p><strong>Calories:</strong> <span id="calories"></span></p>
+        <p><strong>Protein:</strong> <span id="protein"></span> g</p>
+        <p><strong>Carbs:</strong> <span id="carbs"></span> g</p>
+        <p><strong>Fats:</strong> <span id="fats"></span> g</p>
     </div>
-</section>
+
+</div>
 
 <script>
 function calculate() {
-    const age = parseInt(document.getElementById("age").value);
-    const height = parseInt(document.getElementById("height").value);
-    const weight = parseInt(document.getElementById("weight").value);
+    const age = parseFloat(document.getElementById("age").value);
+    const height = parseFloat(document.getElementById("height").value);
+    const weight = parseFloat(document.getElementById("weight").value);
     const activity = parseFloat(document.getElementById("activity").value);
 
-    // Mifflin-St Jeor formula (male)
-    let bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
-    let maintenance = Math.round(bmr * activity);
+    if (!age || !height || !weight) return;
 
-    // Macros
-    let protein = Math.round(weight * 2);
-    let fats = Math.round(weight * 0.8);
-    let carbs = Math.round((maintenance - (protein * 4) - (fats * 9)) / 4);
+    // Mifflin-St Jeor
+    const bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+    const calories = Math.round(bmr * activity);
 
-    // Put data into HTML
-    document.getElementById("calories").textContent = maintenance;
-    document.getElementById("protein").textContent = protein;
-    document.getElementById("fats").textContent = fats;
-    document.getElementById("carbs").textContent = carbs;
+    // Simple macro split
+    const protein = Math.round(weight * 2.2);
+    const fats = Math.round((calories * 0.25) / 9);
+    const carbs = Math.round((calories - (protein * 4 + fats * 9)) / 4);
 
-    // Show result box
+    document.getElementById("calories").innerText = calories;
+    document.getElementById("protein").innerText = protein;
+    document.getElementById("carbs").innerText = carbs;
+    document.getElementById("fats").innerText = fats;
+
     document.getElementById("results").style.display = "block";
 }
 </script>
-
 {% endblock %}

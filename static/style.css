@@ -1321,3 +1321,58 @@ body {
     outline: none;
     box-shadow: 0 0 0 2px rgba(30, 136, 229, 0.25);
 }
+/* --- Calculator select matches inputs --- */
+.styled-select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #ffffff;     /* matches input background */
+    color: #333;                   /* same text color as inputs */
+    box-sizing: border-box;
+    -webkit-appearance: none;      /* remove native arrow styling */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Optional small caret icon on the right */
+.styled-select {
+    background-image: linear-gradient(45deg, transparent 50%, #666 50%),
+                      linear-gradient(135deg, #666 50%, transparent 50%);
+    background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 40px; /* room for caret */
+}
+
+/* Focus style */
+.styled-select:focus {
+    outline: none;
+    border-color: #1E90FF;
+    box-shadow: 0 0 0 4px rgba(30, 144, 255, 0.08);
+}
+
+/* --- Center + size Calculate button --- */
+.calc-btn {
+    display: block;
+    margin: 18px auto 0;   /* centers the button */
+    width: 240px;          /* fixed width for visual balance */
+    max-width: 100%;
+    text-align: center;
+}
+
+/* --- Nutrition page: center the "Open Calculator" button --- */
+/* Put the button inside a wrapper with class .btn-center, or use .btn.calculator-link */
+.btn.calculator-link {
+    display: inline-block;
+    margin: 20px auto;
+    padding: 12px 24px;
+    width: auto;
+}
+
+/* Ensure the wrapper centers inline elements */
+.btn-center {
+    text-align: center;
+    margin-top: 20px;
+}
