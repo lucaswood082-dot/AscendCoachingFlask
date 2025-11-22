@@ -10,7 +10,7 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 # --------- SETTINGS ---------
 GOOGLE_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby00GsfUEA-OEkqs-cQromJLK26L-m8KcON--gngoBeWg1uY5sfWQkNKXmYG0UiARRBVg/exec"
 ADMIN_EMAIL = "woojoowood01@gmail.com"   # where notifications get sent
-SMTP_EMAIL = "yourgmail@gmail.com"       # Gmail you send FROM
+SMTP_EMAIL = "woojoowood01@gmail.com"       # Gmail you send FROM
 SMTP_PASSWORD = "bhhy vcyy tqno imjy"      # Gmail app password (not account password!)
 # ----------------------------
 
