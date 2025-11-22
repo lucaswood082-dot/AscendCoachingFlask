@@ -1022,3 +1022,66 @@ body {
 .btn:hover {
     background-color: #187bcd; /* slightly darker on hover */
 }
+/* Contact form container */
+.form-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+/* Form headings */
+.form-container h2 {
+    font-size: 28px;
+    color: #1E3A8C; /* dark blue title */
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Optional form description */
+.form-container p {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Form fields */
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Submit button matches theme */
+.form-container .btn {
+    width: 100%;
+    background-color: #1E90FF;
+    color: #fff;
+    padding: 12px 0;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-container .btn:hover {
+    background-color: #187bcd;
+}
+
+/* Error messages */
+.error {
+    color: #ff4d4f;
+    font-weight: 500;
+    margin-top: 10px;
+    text-align: center;
+}

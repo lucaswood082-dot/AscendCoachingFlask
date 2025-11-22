@@ -3,19 +3,13 @@
 {% block content %}
 <div class="form-container">
     <h2>Contact Us</h2>
-    <p>Please fill out the form below and we will get back to you as soon as possible.</p>
-
+    <p>Fill out the form below and we’ll get back to you as soon as possible.</p>
+    
     <form method="POST" action="/submit_contact">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name" required>
-
-        <label for="contact">Email</label>
-        <input type="email" id="contact" name="contact" placeholder="Your email" required>
-
-        <label for="goals">Your Goals</label>
-        <textarea id="goals" name="goals" placeholder="Describe your goals..." required></textarea>
-
-        <button type="submit">Submit</button>
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="contact" placeholder="Email Address" required>
+        <textarea name="goals" placeholder="Your Goals" required></textarea>
+        <button type="submit" class="btn">Submit</button>
     </form>
 
     {% if error %}
