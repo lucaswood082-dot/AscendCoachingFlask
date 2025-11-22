@@ -87,6 +87,11 @@ def optimal_recovery():
 def supplements():
     return render_template("supplements.html")
 
+@app.route("/calculator")
+def calculator():
+    return render_template("calculator.html")
+
+
 # ---------------- PROGRAM REQUEST ----------------
 @app.route("/get_program/<program>", methods=["GET", "POST"])
 def get_program(program):

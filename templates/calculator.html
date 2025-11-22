@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="intro">
+    <h2>Calorie & Macro Calculator</h2>
+    <p>Calculate your daily calories and optimal macro split based on your stats.</p>
+</section>
+
+<section class="form-container">
+    <form id="calcForm" class="form-box">
+        <label>Age</label>
+        <input type="number" id="age" required>
+
+        <label>Height (cm)</label>
+        <input type="number" id="height" required>
+
+        <label>Weight (kg)</label>
+        <input type="number" id="weight" required>
+
+        <label>Activity Level</label>
+        <select id="activity">
+            <option value="1.2">Sedentary</option>
+            <option value="1.375">Lightly Active</option>
+            <option value="1.55">Moderately Active</option>
+            <option value="1.725">Very Active</option>
+            <option value="1.9">Super Active</option>
+        </select>
+
+        <button type="button" class="btn" onclick="calculate()">Calculate</button>
+    </form>
+</section>
+
+<section id="results" class="form-container" style="display:none;">
+    <div class="form-box">
+        <h3>Your Results</h3>
+        <p><strong>Maintenance Calories:</strong> <span id="calories"></span> kcal/day</p>
+        <p><strong>Protein:</strong> <span id="protein"></span> g/day</p>
+        <p><strong>Fats:</strong> <span id="fats"></span> g/day</p>
+        <p><strong>Carbs:</strong> <span id="carbs"></span> g/day</p>
+    </div>
+</section>
+
+<script>
+function calculate() {
+    const age = parseInt(document.getElementById("age").value);
+    const height = parseInt(document.getElementById("height").value);
+    const weight = parseInt(document.getElementById("weight").value);
+    const activity = parseFloat(document.getElementById("activity").value);
+
+    // Basic Mifflin-St Jeor Formula (male example)
+    let bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+
+    let maintenance = Math.round(bmr * activity);
+
+    // Macros
+    let protein = Math.round(weight * 2);
+    let fats = Math.round(weight * 0.8);
+    let carbs = Math.round((maintenance - (protein * 4) - (fats * 9)) / 4);
+
+    document.getElementById("calories").textContent = maintenance;
+    document.getElementById("protein").textContent = protein;
+    document.getElementById("fats").textContent = fats;
+    document.getElementById("carbs").textContent = carbs;
+
+    document.getElementById("results").style.display = "block";
+}
+</script>
+
+{% endblock %}
