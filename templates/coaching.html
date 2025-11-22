@@ -40,19 +40,24 @@
 
 <!-- Coaching Signup Form -->
 <section class="form-container">
+    <h3>Sign Up for Coaching</h3>
+    <p>Fill out the form below and our coaching team will reach out to you.</p>
     <form action="/submit_contact" method="POST" class="form-box">
-        <h3>Sign Up for Coaching</h3>
         <label>Name</label>
-        <input type="text" name="name" required>
+        <input type="text" name="name" placeholder="Your full name" required>
 
         <label>Email or Phone</label>
-        <input type="text" name="contact" required>
+        <input type="text" name="contact" placeholder="Email or phone number" required>
 
         <label>Goals (brief)</label>
-        <textarea name="goals" rows="4" required></textarea>
+        <textarea name="goals" rows="4" placeholder="Describe your goals" required></textarea>
 
         <button type="submit" class="btn">Submit Signup</button>
     </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
 </section>
 
 {% endblock %}

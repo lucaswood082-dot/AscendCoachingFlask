@@ -1234,3 +1234,66 @@ body {
 .success-box .btn:hover {
     background-color: #187bcd;
 }
+/* Coaching / Contact Form Container */
+.form-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background: rgba(0, 0, 50, 0.8); /* semi-transparent dark blue */
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    text-align: center;
+    color: #ffffff; /* all text inside is white */
+}
+
+.form-container h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #1E90FF; /* theme blue for headings */
+}
+
+.form-container p {
+    font-size: 16px;
+    margin-bottom: 25px;
+    color: #ddd;
+}
+
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    padding: 14px 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.1); /* light transparent background */
+    color: white; /* input text color */
+}
+
+.form-container input::placeholder,
+.form-container textarea::placeholder {
+    color: #bbb; /* lighter placeholder */
+}
+
+.form-container button.btn {
+    width: 100%;
+    padding: 14px 0;
+    background-color: #1E90FF;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.form-container button.btn:hover {
+    background-color: #187bcd;
+}
+
+.error {
+    color: #ff4d4f;
+    font-weight: 500;
+    margin-top: 10px;
+}
