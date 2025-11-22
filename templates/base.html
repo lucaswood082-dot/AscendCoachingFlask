@@ -2,14 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ascend Coaching — Dreams without Destinations</title>
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1E90FF">
+
+    <!-- Apple / iOS Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/icon-192x192.png') }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='icons/icon-192x192.png') }}">
+
+    <!-- Optional: Apple splash screen for iOS -->
+    <link rel="apple-touch-startup-image" href="{{ url_for('static', filename='icons/icon-512x512.png') }}">
 </head>
+
 <body>
     <header>
         <div class="container">
             <h1>Ascend Coaching</h1>
             <p>Dreams without Destinations</p>
+
             <nav>
                 <a href="/">Home</a>
                 <a href="/about">About</a>
@@ -30,5 +52,25 @@
             <p>© 2025 Ascend Coaching. Built with Discipline.</p>
         </div>
     </footer>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}")
+                .then(registration => console.log('Service Worker registered:', registration))
+                .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+
+        // Optional: Prompt install event (for Chrome)
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // Show your install button here if you have one
+            console.log('PWA install prompt saved');
+        });
+    </script>
 </body>
 </html>
