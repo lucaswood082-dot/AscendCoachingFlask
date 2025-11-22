@@ -1304,3 +1304,20 @@ body {
     border-radius: 8px;
     margin-bottom: 15px;
 }
+/* Make select match input styling */
+.styled-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background: #f8faff;
+    box-sizing: border-box;
+}
+
+/* Hover & focus effects */
+.styled-select:focus {
+    border-color: #1e88e5;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(30, 136, 229, 0.25);
+}
