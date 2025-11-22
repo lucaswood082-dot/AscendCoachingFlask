@@ -1,76 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ascend Coaching — Dreams without Destinations</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ascend Coaching — Dreams without Destinations</title>
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <meta name="theme-color" content="#4CAF50">
 
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#4CAF50">
-
-    <!-- Apple / iOS Support -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/icon-192x192.png') }}">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="{{ url_for('static', filename='icons/icon-192x192.png') }}">
-
-    <!-- Optional: Apple splash screen -->
-    <link rel="apple-touch-startup-image" href="{{ url_for('static', filename='icons/icon-512x512.png') }}">
+  <!-- iOS support -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/icon-192x192.png') }}">
 </head>
-
 <body>
-    <header>
-        <div class="container">
-            <h1>Ascend Coaching</h1>
-            <p>Dreams without Destinations</p>
+  <header>
+    <h1>Ascend Coaching</h1>
+    <p>Dreams without Destinations</p>
+  </header>
 
-            <nav>
-                <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/programs">Programs</a>
-                <a href="/nutrition">Nutrition Guide</a>
-                <a href="/coaching">Coaching Signup</a>
-                <a href="/faq">FAQ</a>
-                <a href="/contact">Contact</a>
-                <a href="/optimal">Optimal</a>
-            </nav>
-        </div>
-    </header>
+  {% block content %}{% endblock %}
 
-    {% block content %}{% endblock %}
+  <footer>© 2025 Ascend Coaching</footer>
 
-    <footer>
-        <div class="container">
-            <p>© 2025 Ascend Coaching. Built with Discipline.</p>
-        </div>
-    </footer>
-
-    <!-- Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}")
-                .then(registration => console.log('Service Worker registered:', registration))
-                .catch(err => console.log('Service Worker registration failed:', err));
-            });
-        }
-
-        // Optional: Handle beforeinstallprompt event for manual install
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            console.log('PWA install prompt saved');
-            // You can show a custom install button here
-        });
-    </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}")
+        .then(reg => console.log('SW registered', reg))
+        .catch(err => console.log('SW failed', err));
+      });
+    }
+  </script>
 </body>
 </html>
