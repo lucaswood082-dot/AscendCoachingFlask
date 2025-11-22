@@ -3,17 +3,21 @@ import os
 import requests
 import smtplib
 from email.mime.text import MIMEText
+import threading
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-# --------- SETTINGS FROM ENV VARIABLES ---------
+# ---------------- SETTINGS VIA ENV VARIABLES ----------------
 GOOGLE_WEBHOOK_URL = os.environ.get("GOOGLE_WEBHOOK_URL")
-ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL")         # where notifications get sent
-SMTP_EMAIL = os.environ.get("SMTP_EMAIL")           # Gmail you send FROM
-SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD")     # Gmail app password
+ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL")
+SMTP_EMAIL = os.environ.get("SMTP_EMAIL")
+SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD")
 
-# -------- EMAIL FUNCTION --------
+if not all([GOOGLE_WEBHOOK_URL, ADMIN_EMAIL, SMTP_EMAIL, SMTP_PASSWORD]):
+    raise RuntimeError("Missing one or more required environment variables: GOOGLE_WEBHOOK_URL, ADMIN_EMAIL, SMTP_EMAIL, SMTP_PASSWORD")
+
+# ---------------- EMAIL FUNCTION ----------------
 def send_email_notification(subject, message):
     try:
         msg = MIMEText(message)
@@ -25,17 +29,16 @@ def send_email_notification(subject, message):
             server.login(SMTP_EMAIL, SMTP_PASSWORD)
             server.sendmail(SMTP_EMAIL, ADMIN_EMAIL, msg.as_string())
     except Exception as e:
-        print("Email failed:", e)  # log instead of crashing
+        print("Email failed:", e)
 
-# -------- SEND TO GOOGLE SHEETS --------
+# ---------------- GOOGLE SHEETS FUNCTION ----------------
 def send_to_sheet(data):
     try:
         requests.post(GOOGLE_WEBHOOK_URL, json=data, timeout=5)
     except Exception as e:
-        print("Google Sheet Error:", e)  # log instead of crashing
+        print("Google Sheet Error:", e)
 
-
-# ----------- ROUTES -------------
+# ---------------- ROUTES ----------------
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -84,8 +87,7 @@ def optimal_recovery():
 def supplements():
     return render_template("supplements.html")
 
-
-# ---------- PROGRAM REQUEST ----------
+# ---------------- PROGRAM REQUEST ----------------
 @app.route("/get_program/<program>", methods=["GET", "POST"])
 def get_program(program):
     if request.method == "POST":
@@ -93,25 +95,17 @@ def get_program(program):
         if not email:
             return render_template("get_program.html", program=program, error="Please enter a valid email.")
 
-        # Attempt sending data to sheet & email without crashing
-        try:
-            send_to_sheet({"form_type": "Program Request", "email": email, "program": program})
-        except Exception as e:
-            print("Sheet submission error:", e)
-        try:
-            send_email_notification(f"New Program Request: {program}", f"Email: {email}\nProgram: {program}")
-        except Exception as e:
-            print("Email notification error:", e)
+        # run async
+        threading.Thread(target=lambda: send_to_sheet({"form_type": "Program Request", "email": email, "program": program})).start()
+        threading.Thread(target=lambda: send_email_notification(f"New Program Request: {program}", f"Email: {email}\nProgram: {program}")).start()
 
-        return render_template(
-            "submit_success.html",
-            title="Program Sent",
-            message=f"Thanks! The {program.capitalize()} program has been sent to {email}."
-        )
+        return render_template("submit_success.html",
+                               title="Program Sent",
+                               message=f"Thanks! The {program.capitalize()} program has been sent to {email}.")
+
     return render_template("get_program.html", program=program, error=None)
 
-
-# ---------- CONTACT FORM ----------
+# ---------------- CONTACT FORM ----------------
 @app.route("/submit_contact", methods=["POST"])
 def submit_contact():
     name = request.form.get("name")
@@ -121,46 +115,28 @@ def submit_contact():
     if not name or not contact_info or not goals:
         return render_template("contact.html", error="Please fill out all required fields.")
 
-    try:
-        send_to_sheet({"form_type": "Coaching Contact", "name": name, "contact": contact_info, "goals": goals})
-    except Exception as e:
-        print("Sheet submission error:", e)
-    try:
-        send_email_notification("New Coaching Contact", f"Name: {name}\nContact: {contact_info}\nGoals: {goals}")
-    except Exception as e:
-        print("Email notification error:", e)
+    threading.Thread(target=lambda: send_to_sheet({"form_type": "Coaching Contact", "name": name, "contact": contact_info, "goals": goals})).start()
+    threading.Thread(target=lambda: send_email_notification("New Coaching Contact", f"Name: {name}\nContact: {contact_info}\nGoals: {goals}")).start()
 
-    return render_template(
-        "submit_success.html",
-        title="Signup Received",
-        message=f"Thanks {name}! We'll reach out via {contact_info}."
-    )
+    return render_template("submit_success.html",
+                           title="Signup Received",
+                           message=f"Thanks {name}! We'll reach out via {contact_info}.")
 
-
-# ---------- NEWSLETTER ----------
+# ---------------- NEWSLETTER ----------------
 @app.route("/newsletter", methods=["POST"])
 def newsletter():
     email = request.form.get("email")
     if not email:
         return render_template("contact.html", error="Please provide a valid email.")
 
-    try:
-        send_to_sheet({"form_type": "Newsletter Signup", "email": email})
-    except Exception as e:
-        print("Sheet submission error:", e)
-    try:
-        send_email_notification("New Newsletter Signup", f"Email: {email}")
-    except Exception as e:
-        print("Email notification error:", e)
+    threading.Thread(target=lambda: send_to_sheet({"form_type": "Newsletter Signup", "email": email})).start()
+    threading.Thread(target=lambda: send_email_notification("New Newsletter Signup", f"Email: {email}")).start()
 
-    return render_template(
-        "submit_success.html",
-        title="Newsletter Subscribed",
-        message=f"{email} has been added to the mailing list."
-    )
+    return render_template("submit_success.html",
+                           title="Newsletter Subscribed",
+                           message=f"{email} has been added to the mailing list.")
 
-
-# -------- RUN APP ----------
+# ---------------- RUN APP ----------------
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     app.run(host="0.0.0.0", port=port)

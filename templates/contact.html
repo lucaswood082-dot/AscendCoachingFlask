@@ -1,37 +1,10 @@
-{% extends "base.html" %}
-{% block content %}
+<form method="POST" action="/submit_contact">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="contact" placeholder="Email" required>
+    <textarea name="goals" placeholder="Your goals" required></textarea>
+    <button type="submit">Submit</button>
+</form>
 
-<!-- Hero Section -->
-<section class="hero">
-    <h2 class="hero-title">Get in Touch</h2>
-    <p class="hero-sub">Send us your goals, and let's build your path to success!</p>
-</section>
-
-<!-- Contact Section -->
-<section class="contact">
-    <div class="contact-container">
-
-        <!-- Coaching Signup Form -->
-        <div class="contact-card">
-            <h3>Coaching Sign-Up</h3>
-            <form action="/submit_contact" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="text" name="contact" placeholder="Email or Phone" required>
-                <textarea name="goals" placeholder="Your Goals (brief)" rows="4" required></textarea>
-                <button type="submit">Submit Signup</button>
-            </form>
-        </div>
-
-        <!-- Newsletter Signup Form -->
-        <div class="contact-card">
-            <h3>Join Newsletter</h3>
-            <form action="/newsletter" method="POST">
-                <input type="email" name="email" placeholder="Email Address" required>
-                <button type="submit">Join</button>
-            </form>
-        </div>
-
-    </div>
-</section>
-
-{% endblock %}
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
