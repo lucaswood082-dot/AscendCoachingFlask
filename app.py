@@ -7,13 +7,11 @@ from email.mime.text import MIMEText
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-# --------- SETTINGS ---------
-GOOGLE_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby00GsfUEA-OEkqs-cQromJLK26L-m8KcON--gngoBeWg1uY5sfWQkNKXmYG0UiARRBVg/exec"
-ADMIN_EMAIL = "woojoowood01@gmail.com"   # where notifications get sent
-SMTP_EMAIL = "woojoowood01@gmail.com"       # Gmail you send FROM
-SMTP_PASSWORD = "bhhy vcyy tqno imjy"      # Gmail app password (not account password!)
-# ----------------------------
-
+# --------- SETTINGS FROM ENV VARIABLES ---------
+GOOGLE_WEBHOOK_URL = os.environ.get("GOOGLE_WEBHOOK_URL")
+ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL")         # where notifications get sent
+SMTP_EMAIL = os.environ.get("SMTP_EMAIL")           # Gmail you send FROM
+SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD")     # Gmail app password
 
 # -------- EMAIL FUNCTION --------
 def send_email_notification(subject, message):
@@ -27,14 +25,14 @@ def send_email_notification(subject, message):
             server.login(SMTP_EMAIL, SMTP_PASSWORD)
             server.sendmail(SMTP_EMAIL, ADMIN_EMAIL, msg.as_string())
     except Exception as e:
-        print("Email failed:", e)
+        print("Email failed:", e)  # log instead of crashing
 
 # -------- SEND TO GOOGLE SHEETS --------
 def send_to_sheet(data):
     try:
-        requests.post(GOOGLE_WEBHOOK_URL, json=data)
+        requests.post(GOOGLE_WEBHOOK_URL, json=data, timeout=5)
     except Exception as e:
-        print("Google Sheet Error:", e)
+        print("Google Sheet Error:", e)  # log instead of crashing
 
 
 # ----------- ROUTES -------------
@@ -92,29 +90,24 @@ def supplements():
 def get_program(program):
     if request.method == "POST":
         email = request.form.get("email")
-
         if not email:
             return render_template("get_program.html", program=program, error="Please enter a valid email.")
 
-        # SEND TO SHEET
-        send_to_sheet({
-            "form_type": "Program Request",
-            "email": email,
-            "program": program
-        })
-
-        # EMAIL NOTIFY YOU
-        send_email_notification(
-            subject=f"New Program Request: {program}",
-            message=f"Email: {email}\nProgram: {program}"
-        )
+        # Attempt sending data to sheet & email without crashing
+        try:
+            send_to_sheet({"form_type": "Program Request", "email": email, "program": program})
+        except Exception as e:
+            print("Sheet submission error:", e)
+        try:
+            send_email_notification(f"New Program Request: {program}", f"Email: {email}\nProgram: {program}")
+        except Exception as e:
+            print("Email notification error:", e)
 
         return render_template(
             "submit_success.html",
             title="Program Sent",
             message=f"Thanks! The {program.capitalize()} program has been sent to {email}."
         )
-
     return render_template("get_program.html", program=program, error=None)
 
 
@@ -128,19 +121,14 @@ def submit_contact():
     if not name or not contact_info or not goals:
         return render_template("contact.html", error="Please fill out all required fields.")
 
-    # SEND TO SHEET
-    send_to_sheet({
-        "form_type": "Coaching Contact",
-        "name": name,
-        "contact": contact_info,
-        "goals": goals
-    })
-
-    # EMAIL YOU
-    send_email_notification(
-        subject="New Coaching Contact",
-        message=f"Name: {name}\nContact: {contact_info}\nGoals: {goals}"
-    )
+    try:
+        send_to_sheet({"form_type": "Coaching Contact", "name": name, "contact": contact_info, "goals": goals})
+    except Exception as e:
+        print("Sheet submission error:", e)
+    try:
+        send_email_notification("New Coaching Contact", f"Name: {name}\nContact: {contact_info}\nGoals: {goals}")
+    except Exception as e:
+        print("Email notification error:", e)
 
     return render_template(
         "submit_success.html",
@@ -153,21 +141,17 @@ def submit_contact():
 @app.route("/newsletter", methods=["POST"])
 def newsletter():
     email = request.form.get("email")
-
     if not email:
         return render_template("contact.html", error="Please provide a valid email.")
 
-    # SEND TO SHEET
-    send_to_sheet({
-        "form_type": "Newsletter Signup",
-        "email": email
-    })
-
-    # EMAIL YOU
-    send_email_notification(
-        subject="New Newsletter Signup",
-        message=f"Email: {email}"
-    )
+    try:
+        send_to_sheet({"form_type": "Newsletter Signup", "email": email})
+    except Exception as e:
+        print("Sheet submission error:", e)
+    try:
+        send_email_notification("New Newsletter Signup", f"Email: {email}")
+    except Exception as e:
+        print("Email notification error:", e)
 
     return render_template(
         "submit_success.html",
