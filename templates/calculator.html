@@ -2,11 +2,13 @@
 
 {% block content %}
 
+<!-- Hero Section -->
 <section class="hero">
     <h2>Calorie & Macro Calculator</h2>
-    <p>Get an estimate of your daily calorie needs based on your stats and activity.</p>
+    <p>Estimate your daily calories and macros based on your stats and activity level.</p>
 </section>
 
+<!-- Calculator Form -->
 <section class="form-container">
     <form id="calcForm" class="form-box">
         <h3>Enter Your Details</h3>
@@ -37,11 +39,15 @@
             <option value="1.9">Athlete (2x per day)</option>
         </select>
 
-        <button type="button" class="btn" onclick="calculate()">Calculate</button>
+        <!-- Centered Calculate Button -->
+        <div style="text-align:center; margin-top:20px;">
+            <button type="button" class="btn" onclick="calculate()">Calculate</button>
+        </div>
     </form>
 </section>
 
-<section class="result-container" id="results" style="display:none;">
+<!-- Results -->
+<section id="results" class="form-container" style="display:none;">
     <div class="form-box">
         <h3>Your Results</h3>
         <p id="calories"></p>
@@ -51,17 +57,16 @@
     </div>
 </section>
 
+<!-- Styles for Selects -->
 <style>
-/* Ensures <select> matches input boxes */
-
 .styled-select {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
-    border: 1px solid #1e40af;
+    border: 1px solid #1E90FF;
     background: #0f172a;
     color: white;
-    font-size: 15px;
+    font-size: 16px;
     margin-bottom: 15px;
 }
 
@@ -71,6 +76,7 @@
 }
 </style>
 
+<!-- Calculator Script -->
 <script>
 function calculate() {
     const age = parseInt(document.getElementById("age").value);
@@ -82,7 +88,6 @@ function calculate() {
     if (!age || !height || !weight || !gender || !activity) return;
 
     let bmr;
-
     if (gender === "male") {
         bmr = 10 * weight + 6.25 * height - 5 * age + 5;
     } else {
@@ -90,7 +95,6 @@ function calculate() {
     }
 
     const tdee = Math.round(bmr * activity);
-
     const protein = Math.round(weight * 2);
     const fats = Math.round((tdee * 0.25) / 9);
     const carbs = Math.round((tdee - (protein * 4 + fats * 9)) / 4);
