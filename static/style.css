@@ -907,3 +907,62 @@ body {
 .btn-home:hover {
     background-color: #45a049;
 }
+.success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+    min-height: 60vh;
+    background: #f0f4ff; /* light blue background for the page */
+}
+
+.success-card {
+    text-align: center;
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 100%;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.success-icon {
+    font-size: 50px;
+    color: #1E90FF; /* primary blue theme color */
+    margin-bottom: 20px;
+}
+
+.success-title {
+    font-size: 28px;
+    color: #1E3A8A; /* darker blue for text */
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.success-message {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.btn-home {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #1E90FF; /* primary blue */
+    color: #fff;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: #187bcd; /* slightly darker blue on hover */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
