@@ -1,75 +1,87 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="calc-page">
 
-    <!-- Title -->
-    <h2 class="calc-title">Calorie & Macro Calculator</h2>
-    <p class="calc-subtitle">
-        Enter your details below to estimate daily calories and macros.
-    </p>
+<section class="hero">
+    <h2>Calorie & Macro Calculator</h2>
+    <p>Get an estimate of your daily calorie needs based on your stats and activity level.</p>
+</section>
 
-    <!-- Calculator Form -->
-    <form id="calcForm" class="calc-form">
+<section class="form-container">
+    <form id="calcForm" class="form-box">
+        <h3>Enter Your Details</h3>
 
-        <label>Age</label>
+        <label for="age">Age</label>
         <input type="number" id="age" required>
 
-        <label>Height (cm)</label>
+        <label for="height">Height (cm)</label>
         <input type="number" id="height" required>
 
-        <label>Weight (kg)</label>
+        <label for="weight">Weight (kg)</label>
         <input type="number" id="weight" required>
 
-        <label>Activity Level</label>
-        <select id="activity" class="styled-select" required>
-            <option value="1.2">Sedentary (little exercise)</option>
-            <option value="1.375">Lightly Active (1–3 days/week)</option>
-            <option value="1.55">Moderately Active (3–5 days/week)</option>
-            <option value="1.725">Very Active (6–7 days/week)</option>
-            <option value="1.9">Super Active (athlete)</option>
+        <label for="gender">Gender</label>
+        <select id="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
         </select>
 
-        <button type="button" class="btn calc-btn" onclick="calculate()">
-            Calculate
-        </button>
+        <label>Activity Level</label>
+        <select id="activity" required>
+            <option value="1.2">Sedentary (Little or no exercise)</option>
+            <option value="1.375">Light (1-3 days/week)</option>
+            <option value="1.55">Moderate (3-5 days/week)</option>
+            <option value="1.725">Intense (6-7 days/week)</option>
+            <option value="1.9">Athlete (2x per day)</option>
+        </select>
+
+        <button type="button" class="btn" onclick="calculate()">Calculate</button>
     </form>
+</section>
 
-    <!-- Results Box -->
-    <div id="results" class="results-box" style="display: none;">
-        <h3>Your Daily Targets</h3>
-        <p><strong>Calories:</strong> <span id="calories"></span></p>
-        <p><strong>Protein:</strong> <span id="protein"></span> g</p>
-        <p><strong>Carbs:</strong> <span id="carbs"></span> g</p>
-        <p><strong>Fats:</strong> <span id="fats"></span> g</p>
+<section class="result-container" id="results" style="display:none;">
+    <div class="form-box">
+        <h3>Your Results</h3>
+        <p id="calories"></p>
+        <p id="protein"></p>
+        <p id="carbs"></p>
+        <p id="fats"></p>
     </div>
-
-</div>
+</section>
 
 <script>
 function calculate() {
-    const age = parseFloat(document.getElementById("age").value);
-    const height = parseFloat(document.getElementById("height").value);
-    const weight = parseFloat(document.getElementById("weight").value);
+    const age = parseInt(document.getElementById("age").value);
+    const height = parseInt(document.getElementById("height").value);
+    const weight = parseInt(document.getElementById("weight").value);
+    const gender = document.getElementById("gender").value;
     const activity = parseFloat(document.getElementById("activity").value);
 
     if (!age || !height || !weight) return;
 
-    // Mifflin-St Jeor
-    const bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-    const calories = Math.round(bmr * activity);
+    let bmr;
 
-    // Simple macro split
-    const protein = Math.round(weight * 2.2);
-    const fats = Math.round((calories * 0.25) / 9);
-    const carbs = Math.round((calories - (protein * 4 + fats * 9)) / 4);
+    // Mifflin-St Jeor Equation
+    if (gender === "male") {
+        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+    } else {
+        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+    }
 
-    document.getElementById("calories").innerText = calories;
-    document.getElementById("protein").innerText = protein;
-    document.getElementById("carbs").innerText = carbs;
-    document.getElementById("fats").innerText = fats;
+    const tdee = Math.round(bmr * activity);
 
-    document.getElementById("results").style.display = "block";
+    // macros
+    const protein = Math.round(weight * 2); // g
+    const fats = Math.round((tdee * 0.25) / 9);
+    const carbs = Math.round((tdee - (protein * 4 + fats * 9)) / 4);
+
+    document.getElementById("calories").innerHTML = `<strong>Daily Calories:</strong> ${tdee} kcal`;
+    document.getElementById("protein").innerHTML = `<strong>Protein:</strong> ${protein}g`;
+    document.getElementById("carbs").innerHTML = `<strong>Carbs:</strong> ${carbs}g`;
+    document.getElementById("fats").innerHTML = `<strong>Fats:</strong> ${fats}g`;
+
+    document.getElementById("results").style.display = "flex";
 }
 </script>
+
 {% endblock %}
