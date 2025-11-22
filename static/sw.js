@@ -2,8 +2,25 @@ const CACHE_NAME = 'ascend-cache-v1';
 const urlsToCache = [
   '/',
   '/static/style.css',
-  // Add more static files here if needed
+  '/static/sw.js',
+  '/static/manifest.json',
+  '/static/icons/icon-192x192.png',
+  '/static/icons/icon-512x512.png',
+  '/about',
+  '/programs',
+  '/nutrition',
+  '/coaching',
+  '/faq',
+  '/contact',
+  '/optimal',
+  '/static/style.css',
+  '/static/sw.js',
+  '/static/manifest.json',
+  '/static/icons/icon-192x192.png',
+  '/static/icons/icon-512x512.png'
 ];
+
+  // Add more pages or images here
 
 // Install event: cache files
 self.addEventListener('install', event => {
