@@ -5,31 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ascend Coaching — Dreams without Destinations</title>
 
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- PWA Manifest -->
   <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  
+  <!-- Theme Color -->
   <meta name="theme-color" content="#4CAF50">
 
-  <!-- iOS support -->
+  <!-- Apple / iOS Support -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/icon-192x192.png') }}">
 </head>
 <body>
+  <!-- Header + Navigation -->
   <header>
-    <h1>Ascend Coaching</h1>
-    <p>Dreams without Destinations</p>
+    <div class="container">
+      <h1>Ascend Coaching</h1>
+      <p>Dreams without Destinations</p>
+
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/programs">Programs</a>
+        <a href="/nutrition">Nutrition Guide</a>
+        <a href="/coaching">Coaching Signup</a>
+        <a href="/faq">FAQ</a>
+        <a href="/contact">Contact</a>
+        <a href="/optimal">Optimal</a>
+      </nav>
+    </div>
   </header>
 
+  <!-- Page content -->
   {% block content %}{% endblock %}
 
-  <footer>© 2025 Ascend Coaching</footer>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Ascend Coaching. Built with Discipline.</p>
+    </div>
+  </footer>
 
+  <!-- Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}")
-        .then(reg => console.log('SW registered', reg))
-        .catch(err => console.log('SW failed', err));
+        .then(registration => console.log('Service Worker registered', registration))
+        .catch(err => console.log('Service Worker registration failed', err));
       });
     }
   </script>
