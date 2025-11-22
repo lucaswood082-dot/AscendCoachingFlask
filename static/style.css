@@ -966,3 +966,59 @@ body {
     from { opacity: 0; transform: translateY(-20px);}
     to { opacity: 1; transform: translateY(0);}
 }
+/* Container to match your form pages */
+.form-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Success box inside container */
+.success-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Large success icon */
+.success-icon {
+    font-size: 48px;
+    color: #1E90FF; /* matches your blue theme */
+    margin-bottom: 20px;
+}
+
+/* Title styling */
+.success-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: #1A3C8C; /* darker blue for contrast */
+    margin-bottom: 12px;
+}
+
+/* Message styling */
+.success-message {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* Home button matches your other buttons */
+.btn {
+    display: inline-block;
+    background-color: #1E90FF;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #187bcd; /* slightly darker on hover */
+}
