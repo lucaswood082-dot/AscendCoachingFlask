@@ -12,7 +12,7 @@
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     
     <!-- Theme Color -->
-    <meta name="theme-color" content="#1E90FF">
+    <meta name="theme-color" content="#4CAF50">
 
     <!-- Apple / iOS Support -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -22,7 +22,7 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='icons/icon-192x192.png') }}">
 
-    <!-- Optional: Apple splash screen for iOS -->
+    <!-- Optional: Apple splash screen -->
     <link rel="apple-touch-startup-image" href="{{ url_for('static', filename='icons/icon-512x512.png') }}">
 </head>
 
@@ -63,13 +63,13 @@
             });
         }
 
-        // Optional: Prompt install event (for Chrome)
+        // Optional: Handle beforeinstallprompt event for manual install
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            // Show your install button here if you have one
             console.log('PWA install prompt saved');
+            // You can show a custom install button here
         });
     </script>
 </body>
