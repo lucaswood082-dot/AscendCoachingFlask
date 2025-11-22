@@ -49,15 +49,45 @@
     </div>
   </footer>
 
-  <!-- Service Worker Registration -->
+  <!-- Install App Button -->
+  <button id="install-btn" style="display:none;">Install App</button>
+
+  <!-- Service Worker & Install Script -->
   <script>
+    let deferredPrompt;
+    const installBtn = document.getElementById('install-btn');
+
+    // Register Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}")
-        .then(registration => console.log('Service Worker registered', registration))
-        .catch(err => console.log('Service Worker registration failed', err));
+          .then(reg => console.log('Service Worker registered', reg))
+          .catch(err => console.log('Service Worker registration failed', err));
       });
     }
+
+    // Capture beforeinstallprompt event
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-block'; // show install button
+      console.log('PWA install prompt saved');
+    });
+
+    // Handle Install button click
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const choiceResult = await deferredPrompt.userChoice;
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
