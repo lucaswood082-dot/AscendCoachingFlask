@@ -1085,3 +1085,52 @@ body {
     margin-top: 10px;
     text-align: center;
 }
+/* Success box container */
+.success-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8faff; /* light blue background */
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.success-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* Title styling */
+.success-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1E3A8C; /* dark blue title */
+    margin-bottom: 15px;
+}
+
+/* Message styling */
+.success-message {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* Button styling (same as other buttons) */
+.success-box .btn {
+    display: inline-block;
+    background-color: #1E90FF;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.success-box .btn:hover {
+    background-color: #187bcd;
+}
